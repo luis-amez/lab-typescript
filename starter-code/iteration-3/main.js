@@ -1,3 +1,46 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var TodoItem = (function () {
+    function TodoItem(title) {
+        this.title = title;
+        this.status = false;
+        this.updatedAt = new Date();
+    }
+    TodoItem.prototype.toggleStatus = function () {
+        this.status = !this.status;
+        this.updatedAt = new Date();
+    };
+    return TodoItem;
+}());
+var TodoList = (function () {
+    function TodoList() {
+        this.tasks = [];
+    }
+    TodoList.prototype.addTask = function (task) {
+        this.tasks.push(task);
+        console.log("=========== NEW TASK ===========\nTask \"" + task.title + "\" inserted in the list");
+        return this.tasks.length;
+    };
+    TodoList.prototype.listAllTasks = function () {
+        this.tasks.forEach(function (task) {
+            console.log(task.title);
+        });
+    };
+    TodoList.prototype.deleteTask = function (task) {
+        var index = this.tasks.indexOf(task);
+        this.tasks.splice(index, 1);
+        console.log("=========== TASK REMOVED ===========\nTask \"" + task.title + "\" removed from the list");
+        return this.tasks.length;
+    };
+    TodoList.prototype.listUncomplete = function () {
+        this.tasks.forEach(function (task) {
+            if (task.status === false) {
+                console.log(task.title);
+            }
+        });
+    };
+    return TodoList;
+}());
 var task1 = new TodoItem('This is our first task');
 var task2 = new TodoItem('Eat pizza 🍕 yummy!!!');
 var task3 = new TodoItem('Finish this iteration 1!! 🤓');
